@@ -2,6 +2,8 @@ package com.baeldung.crud.controllers;
 
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,7 +17,8 @@ import com.baeldung.crud.repositories.UserRepository;
 
 @Controller
 public class UserController {
-    
+    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
+
     private final UserRepository userRepository;
 
     @Autowired
@@ -30,6 +33,7 @@ public class UserController {
     
     @PostMapping("/adduser")
     public String addUser(@Valid User user, BindingResult result, Model model) {
+        logger.debug("user added:" + model);
         if (result.hasErrors()) {
             return "add-user";
         }

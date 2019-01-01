@@ -21,3 +21,8 @@ spring:
       settings:
         trace: false
         web-allow-others: false
+logging:
+  level:
+    ROOT: DEBUG
+    org.springframework.web: DEBUG
+    org.hibernate: DEBUG
