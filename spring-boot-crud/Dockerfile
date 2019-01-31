@@ -14,7 +14,7 @@ VOLUME /tmp
 
 WORKDIR /var/www/app
 
-COPY spring-boot-crud.jar .
+COPY target/spring-boot-crud.jar .
 
   # Run the jar file
 ENTRYPOINT ["java","-jar","/var/www/app/spring-boot-crud.jar"]
