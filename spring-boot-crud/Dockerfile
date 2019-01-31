@@ -1,20 +1,20 @@
 # Start with a base image containing Java runtime
 FROM openjdk:8-jdk-alpine
 
-  # Add Maintainer Info
+# Add Maintainer Info
 LABEL maintainer="xuhang@gmail.com"
 
-  # Add a volume pointing to /tmp
-VOLUME /tmp
-
-  # Make port 8080 available to the world outside this container
+# Make port 8080 available to the world outside this container
 EXPOSE 8080
 
-  # The application's jar file
-ARG JAR_FILE=spring-boot-crud.jar
+RUN mkdir -p /var/www/app
 
-  # Add the application's jar to the container
-ADD ${JAR_FILE} app.jar
+# Add a volume pointing to /tmp, can docker inspect container_id to see the corresponding dir in host machine
+VOLUME /tmp
+
+WORKDIR /var/www/app
+
+COPY spring-boot-crud.jar .
 
   # Run the jar file
-ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
+ENTRYPOINT ["java","-jar","/var/www/app/spring-boot-crud.jar"]
