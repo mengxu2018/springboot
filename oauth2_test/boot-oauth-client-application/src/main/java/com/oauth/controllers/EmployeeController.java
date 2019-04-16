@@ -32,7 +32,7 @@ public class EmployeeController {
 	@RequestMapping(value = "/showEmployees", method = RequestMethod.GET)
 	public ModelAndView showEmployees(@RequestParam("code") String code) throws JsonProcessingException, IOException {
 		ResponseEntity<String> response = null;
-		System.out.println("Authorization Ccode------" + code);
+		System.out.println("Authorization Code------" + code);
 
 		RestTemplate restTemplate = new RestTemplate();
 
@@ -57,6 +57,7 @@ public class EmployeeController {
 		// Get the Access Token From the recieved JSON response
 		ObjectMapper mapper = new ObjectMapper();
 		JsonNode node = mapper.readTree(response.getBody());
+		System.out.println("node"+node);
 		String token = node.path("access_token").asText();
 
 		String url = "http://localhost:8080/user/getEmployeesList";
